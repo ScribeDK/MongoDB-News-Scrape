@@ -198,8 +198,8 @@ var typeIt = function() {
 
   // cycle to different story
   console.log(mongoData);
-  var headline = mongoData[dataCount].headline;
-  var summary = mongoData[dataCount].summary;
+  var headline = mongoData[dataCount].title;
+  var summary = mongoData[dataCount].link;
   dataCount++;
   // type animation for new summary
   (function type() {
