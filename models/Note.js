@@ -10,7 +10,7 @@ var NoteSchema = new Schema({
     type:String
   },
   // just a string
-  body: {
+  note: {
     type:String
   }
 });

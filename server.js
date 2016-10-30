@@ -134,11 +134,25 @@ app.get('/articles/:id', function(req, res){
 	});
 });
 
+app.post('/delete', function(req,res) {
+	Article.findOneAndUpdate({'_id': req.body.id}, {'note': null})
+	.exec(function(err, doc){
+				// log any errors
+				if (err){
+					console.log(err);
+				} else {
+					// or send the document to the browser
+					res.send(doc);
+				}
+			});
+	});
 
 // replace the existing note of an article with a new one
 // or if no note exists for an article, make the posted note it's note.
 app.post('/articles/:id', function(req, res){
 	// create a new note and pass the req.body to the entry.
+	console.log(req.body);
+	
 	var newNote = new Note(req.body);
 
 	// and save the new note the db

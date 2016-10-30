@@ -72,7 +72,7 @@ var gather = function() {
   $.ajax({
     type: "GET",
     dataType: "json",
-    url: '/articles/',
+    url: '/articles/' + mongoData[idCount]._id,
     data: {
       id: mongoData[idCount]._id
     }
@@ -94,19 +94,20 @@ var postNote = function(currentNotes) {
 
   // remove inputs from the note box
   $("#note-box").val("");
-
+	console.log("currentNotes");
+	console.log(currentNotes);
   // make an empty placeholder var for a note
   var note = "";
 
   // for each of the notes
-  for (var i = 0; i < currentNotes.length; i++) {
+  //for (var i = 0; i < currentNotes.length; i++) {
 
     // make the note variable equal to itself, 
     // plus the new note and a new line
-    note = note + currentNotes[i].noteText + '\n';
-  }
+    //note = note + currentNotes[i].noteText + '\n';
+  //}
   // put the current collection of notes into the notebox
-  $("#note-box").val(note);
+  $("#note-box").val(currentNotes.note.note);
 };
 
 // function containing listener to save notes and clear note taking area
@@ -125,10 +126,10 @@ var saveNote = function() {
     $.ajax({
       type: "POST",
       dataType: "json",
-      url: '/articles/',
+      url: '/articles/' + mongoData[idCount]._id,
       data: {
         id: mongoData[idCount]._id, // article id
-        date: dataDate, // date of article's last update
+        //date: dataDate, // date of article's last update
         note: text // date of note
       }
     })
@@ -160,7 +161,7 @@ var deleteNote = function() {
 
     // send an ajax call to delete
     $.ajax({
-      type: "DELETE",
+      type: "POST",
       dataType: "json",
       url: '/delete',
       data: {
